@@ -85,10 +85,21 @@ select * from Categoria
 --buscar todas  as plataformas mesmo as que não estão vinculadas
 select * from Plataforma order by IdPLataforma asc
 
---Buscar através da Procedure a quantidade de lançamentos por categoria
+--Buscar através da Procedure a quantidade de lançamentos por categoria string
 create procedure MostrarMidiasCadatradasPorCategoria @Quantidade varchar (255)
 as 
 select count (IdLancamento) from Lancamento
 where Lancamento.IdCategoria = (select IdCategoria from Categoria where Categoria.Categoria = @Quantidade)
 
 exec MostrarMidiasCadatradasPorCategoria @quantidade = 'Ficção'
+
+--Contar a quantidade de usuários
+select count (*) from Usuario
+
+--Buscar através da Procedure a quantidade de lançamentos por categoria int
+create procedure MostrarMidiasCadatradasPorCategoriaId @Buscar int
+as 
+select count (IdLancamento) from Lancamento
+where Lancamento.IdCategoria = @Buscar
+
+exec MostrarMidiasCadatradasPorCategoriaId @Buscar = 4
